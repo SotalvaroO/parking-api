@@ -5,10 +5,13 @@ import digital.school.parkingapi.model.entity.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class VehicleServiceImpl implements IVehicleService{
+public class VehicleServiceImpl implements IVehicleService {
 
     @Autowired
     private IVehicleRepository iVehicleRepository;
@@ -16,7 +19,7 @@ public class VehicleServiceImpl implements IVehicleService{
     @Override
     public Vehicle registerVehicle(Vehicle vehicle) {
         Vehicle vehicleDB = iVehicleRepository.findByVehiclePlate(vehicle.getVehiclePlate());
-        if (vehicleDB != null){
+        if (vehicleDB != null) {
             return vehicleDB;
         }
         vehicleDB = iVehicleRepository.save(vehicle);
@@ -41,15 +44,17 @@ public class VehicleServiceImpl implements IVehicleService{
     @Override
     public Vehicle deleteVehicle(Long id) {
         Vehicle vehicle = findById(id);
-        if (vehicle == null){
+        if (vehicle == null) {
             return vehicle;
         }
         iVehicleRepository.deleteById(id);
-        return  vehicle;
+        return vehicle;
     }
 
     @Override
     public List<Vehicle> listByVehiclePlate(String plate) {
         return iVehicleRepository.findAllByVehiclePlate(plate);
     }
+
+
 }

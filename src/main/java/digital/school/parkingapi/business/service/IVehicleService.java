@@ -2,6 +2,7 @@ package digital.school.parkingapi.business.service;
 
 import digital.school.parkingapi.model.entity.Vehicle;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IVehicleService {

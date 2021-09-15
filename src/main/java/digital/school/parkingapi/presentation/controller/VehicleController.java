@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,10 +44,25 @@ public class VehicleController {
         return ResponseEntity.ok(vehicle);
     }
 
+//    @GetMapping(value = "/pay")
+//    public Long getTotalToPay(@RequestParam(name = "plate", required = true) String plate){
+//        LocalDateTime realTime = LocalDateTime.now();
+//        Long totalToPay = 0L;
+//        Vehicle vehicle = iVehicleService.findByPlate(plate);
+//        if (vehicle != null){
+//            totalToPay = iVehicleService.getTotalToPay(vehicle.getEntryTime());
+//            return  totalToPay;
+//        }
+//        return null;
+//
+//    }
+
     @PostMapping
     public ResponseEntity<Vehicle> createVehicle(@RequestBody Vehicle vehicle) {
         Vehicle vehicleDB = iVehicleService.registerVehicle(vehicle);
         return ResponseEntity.status(HttpStatus.CREATED).body(vehicleDB);
     }
+
+
 
 }
